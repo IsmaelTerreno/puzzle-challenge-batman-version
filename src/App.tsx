@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import { Solution } from "./solution";
+import { Solution } from './solution';
 
-function App() {
+const App = () => {
   return <Solution />;
-}
+};
 
 export default App;
