@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow } from '@material-ui/core';
 import { PositionBlock } from './PositionBlock';
 import { POSITION_ROW_TYPE } from '../redux/reducers/level';
+import { ScoreInfo } from './ScoreInfo';
 
 const useStyles = makeStyles({
   table: {
-    overflow: 'hidden'
+    overflow: 'hidden',
+    padding: 20
   }
 });
 
@@ -15,15 +17,17 @@ const mapStateToProps = (state: RootState) => ({
   rows: state.level.rows,
   currentLocation: state.level.currentLocation,
   startLocation: state.level.startLocation,
-  finishLocation: state.level.finishLocation
+  finishLocation: state.level.finishLocation,
+  results: state.level.results
 });
 
 type Props = ReturnType<typeof mapStateToProps>;
 
-const LevelDrawer: React.FC<Props> = ({ rows, currentLocation, startLocation, finishLocation }) => {
+const LevelDrawer: React.FC<Props> = ({ rows, currentLocation, startLocation, finishLocation, results }) => {
   const classes = useStyles();
   return (
     <div>
+      <ScoreInfo results={results} />
       <TableContainer component={Paper} className={classes.table}>
         <Table aria-label="game table">
           <TableBody>

@@ -19,6 +19,13 @@ const useStyles = makeStyles({
   },
   finishPosition: {
     background: '#90ed90'
+  },
+  circlePosition: {
+    borderRadius: '50%',
+    border: '1px solid #000000',
+    background: '#fbff01',
+    padding: 23,
+    position: 'absolute'
   }
 });
 
@@ -51,7 +58,7 @@ export const PositionBlock: React.FC<Props> = ({ positionType }) => {
     <Grid container direction="column" alignItems="center" justifyContent="center" spacing={2}>
       <Grid item>
         <Card className={classes.root + ' ' + getStylePosition(positionType) + (isCurrentPosition ? getMoveAnimation() : getEntranceAnimation())}>
-          <CardContent>{isCurrentPosition ? '' : ''}</CardContent>
+          <CardContent>{isCurrentPosition && <div className={classes.circlePosition} />}</CardContent>
         </Card>
       </Grid>
     </Grid>

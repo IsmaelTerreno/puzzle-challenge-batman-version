@@ -40,8 +40,6 @@ window.addEventListener('keydown', event => {
       store.dispatch(setMessageLevel('You win!'));
       store.dispatch(restartLevel());
     }
-  } else {
-    console.log('Moved.');
   }
 });
 
