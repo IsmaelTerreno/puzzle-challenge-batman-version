@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { POSITION_ROW_TYPE } from '../redux/reducers/level';
-import { Card, CardContent, makeStyles } from '@material-ui/core';
+import { Card, CardContent, Grid, makeStyles } from '@material-ui/core';
+import 'animate.css';
 
 const useStyles = makeStyles({
   root: {
-    minHeight: 50,
-    maxWidth: 60
+    minHeight: 80,
+    minWidth: 80
   },
   freeSpace: {
     background: '#ffffff'
@@ -30,7 +31,7 @@ export const PositionBlock: React.FC<Props> = ({ positionType }) => {
       case POSITION_ROW_TYPE.currentPosition:
         return classes.currentPosition;
       case POSITION_ROW_TYPE.finishPosition:
-        return classes.currentPosition;
+        return classes.finishPosition;
       case POSITION_ROW_TYPE.freeSpace:
         return classes.freeSpace;
       case POSITION_ROW_TYPE.obstacle:
@@ -39,9 +40,20 @@ export const PositionBlock: React.FC<Props> = ({ positionType }) => {
         return '';
     }
   };
+  const isCurrentPosition = positionType === POSITION_ROW_TYPE.currentPosition;
+  const getEntranceAnimation = () => {
+    return ' animate__animated animate__flipInY';
+  };
+  const getMoveAnimation = () => {
+    return ' animate__animated animate__bounce';
+  };
   return (
-    <Card className={classes.root + ' ' + getStylePosition(positionType)}>
-      <CardContent>{positionType === POSITION_ROW_TYPE.currentPosition ? 'Circle' : ''}</CardContent>
-    </Card>
+    <Grid container direction="column" alignItems="center" justifyContent="center" spacing={2}>
+      <Grid item>
+        <Card className={classes.root + ' ' + getStylePosition(positionType) + (isCurrentPosition ? getMoveAnimation() : getEntranceAnimation())}>
+          <CardContent>{isCurrentPosition ? '' : ''}</CardContent>
+        </Card>
+      </Grid>
+    </Grid>
   );
 };
