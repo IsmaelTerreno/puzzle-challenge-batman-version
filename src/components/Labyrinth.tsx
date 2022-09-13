@@ -19,7 +19,7 @@ const Labyrinth: React.FC<Props> = ({ leftMovements }) => {
           <LevelDrawerContainer />
         </Grid>
         <Grid item>
-          <Typography variant="h5">Moves left: {leftMovements}</Typography>
+          <Typography variant="h5">Moves left: {leftMovements < 0 ? 0 : leftMovements}</Typography>
         </Grid>
       </Grid>
       <MessageGameContainer />
