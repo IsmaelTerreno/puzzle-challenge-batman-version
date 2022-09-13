@@ -1,8 +1,11 @@
 import React from 'react';
 import { LabyrinthContainer } from './components/Labyrinth';
+import { Container } from '@material-ui/core';
 
-const App = () => {
-  return <LabyrinthContainer />;
-};
+const App = () => (
+  <Container maxWidth="xs">
+    <LabyrinthContainer />
+  </Container>
+);
 
 export default App;

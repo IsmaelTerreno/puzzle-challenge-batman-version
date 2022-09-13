@@ -1,11 +1,13 @@
 import { typedAction } from '../helpers';
 
-enum POSITION_ROW_TYPE {
+export enum POSITION_ROW_TYPE {
   obstacle = 1,
-  freeSpace = 0
+  freeSpace = 0,
+  finishPosition = 2,
+  currentPosition = 3
 }
 
-enum LEVEL_ACTIONS {
+export enum LEVEL_ACTIONS {
   SET_PLAYER_LOCATION = 'level/SET_PLAYER_LOCATION',
   DECREMENT_PLAYER_LEFT_MOVEMENTS = 'level/DECREMENT_PLAYER_LEFT_MOVEMENTS'
 }
