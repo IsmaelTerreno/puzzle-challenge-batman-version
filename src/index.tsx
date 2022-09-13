@@ -16,6 +16,7 @@ window.addEventListener('keydown', event => {
     const leftMovements = store.getState().level.leftMovements;
     const nextLocation: CoordinatePosition = getNewPositionMovement(event, currentLocation, rows);
     const isMoved = nextLocation.column !== currentLocation.column || nextLocation.row !== currentLocation.row;
+    console.log(nextLocation);
     if (isMoved) {
       store.dispatch(decrementLeftMovements());
       store.dispatch(movePosition(nextLocation));
@@ -39,7 +40,7 @@ window.addEventListener('keydown', event => {
           })
         );
         store.dispatch(setMessageLevel('You win!'));
-        store.dispatch(restartLevel());
+        //store.dispatch(restartLevel());
       }
     }
   }

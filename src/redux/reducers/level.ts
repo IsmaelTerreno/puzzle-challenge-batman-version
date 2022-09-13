@@ -11,7 +11,8 @@ export enum POSITION_ROW_TYPE {
   obstacle = 1,
   freeSpace = 0,
   finishPosition = 2,
-  currentPosition = 3
+  currentPosition = 3,
+  startPosition = 4
 }
 
 export enum LEVEL_ACTIONS {

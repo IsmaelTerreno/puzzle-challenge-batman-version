@@ -25,8 +25,8 @@ export const ScoreInfo: React.FC<Props> = ({ results }) => {
         <Card className={classes.root + ' ' + getEntranceAnimation()}>
           <CardContent>
             <Typography variant="h3">Score</Typography>
-            <Typography variant="h5">Wins: {wins}</Typography>
-            <Typography variant="h5">Loses: {loses}</Typography>
+            <Typography variant="h6">Wins: {wins}</Typography>
+            <Typography variant="h6">Loses: {loses}</Typography>
           </CardContent>
         </Card>
       </Grid>

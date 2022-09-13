@@ -18,12 +18,13 @@ const mapStateToProps = (state: RootState) => ({
   currentLocation: state.level.currentLocation,
   startLocation: state.level.startLocation,
   finishLocation: state.level.finishLocation,
-  results: state.level.results
+  results: state.level.results,
+  leftMovements: state.level.leftMovements
 });
 
 type Props = ReturnType<typeof mapStateToProps>;
 
-const LevelDrawer: React.FC<Props> = ({ rows, currentLocation, startLocation, finishLocation, results }) => {
+const LevelDrawer: React.FC<Props> = ({ leftMovements, rows, currentLocation, startLocation, finishLocation, results }) => {
   const classes = useStyles();
   return (
     <div>
@@ -38,15 +39,21 @@ const LevelDrawer: React.FC<Props> = ({ rows, currentLocation, startLocation, fi
                     let positionType = column;
                     const isCurrentPosition = currentLocation.row === idx && currentLocation.column === idx2;
                     const isFinishPosition = finishLocation.row === idx && finishLocation.column === idx2;
+                    const isStartPosition = startLocation.row === idx && startLocation.column === idx2;
+                    const isWinnerPlayer = finishLocation.row === currentLocation.row && finishLocation.column === currentLocation.column;
+                    const isLoserPlayer = leftMovements < 1;
                     if (isCurrentPosition) {
                       positionType = POSITION_ROW_TYPE.currentPosition;
                     }
                     if (isFinishPosition) {
                       positionType = POSITION_ROW_TYPE.finishPosition;
                     }
+                    if (isStartPosition) {
+                      positionType = POSITION_ROW_TYPE.startPosition;
+                    }
                     return (
                       <TableCell key={'column-area-' + idx2}>
-                        <PositionBlock positionType={positionType} />
+                        <PositionBlock positionType={positionType} isCurrentPosition={isCurrentPosition} isWinner={isWinnerPlayer} isLoser={isLoserPlayer} />
                       </TableCell>
                     );
                   })}
