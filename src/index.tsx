@@ -15,30 +15,32 @@ window.addEventListener('keydown', event => {
     const finishLocation = store.getState().level.finishLocation;
     const leftMovements = store.getState().level.leftMovements;
     const nextLocation: CoordinatePosition = getNewPositionMovement(event, currentLocation, rows);
-    console.log(nextLocation);
-    store.dispatch(decrementLeftMovements());
-    store.dispatch(movePosition(nextLocation));
-    const isWinnerPlayer = finishLocation.row === nextLocation.row && finishLocation.column === nextLocation.column;
-    const isLoserPlayer = leftMovements < 1;
-    if (isLoserPlayer) {
-      store.dispatch(
-        addResultGame({
-          leftMovements: leftMovements,
-          winner: false
-        })
-      );
-      store.dispatch(setMessageLevel('You lose.'));
-      store.dispatch(restartLevel());
-    }
-    if (isWinnerPlayer) {
-      store.dispatch(
-        addResultGame({
-          leftMovements: leftMovements,
-          winner: true
-        })
-      );
-      store.dispatch(setMessageLevel('You win!'));
-      store.dispatch(restartLevel());
+    const isMoved = nextLocation.column !== currentLocation.column || nextLocation.row !== currentLocation.row;
+    if (isMoved) {
+      store.dispatch(decrementLeftMovements());
+      store.dispatch(movePosition(nextLocation));
+      const isWinnerPlayer = finishLocation.row === nextLocation.row && finishLocation.column === nextLocation.column;
+      const isLoserPlayer = leftMovements < 1;
+      if (isLoserPlayer) {
+        store.dispatch(
+          addResultGame({
+            leftMovements: leftMovements,
+            winner: false
+          })
+        );
+        store.dispatch(setMessageLevel('You lose.'));
+        store.dispatch(restartLevel());
+      }
+      if (isWinnerPlayer) {
+        store.dispatch(
+          addResultGame({
+            leftMovements: leftMovements,
+            winner: true
+          })
+        );
+        store.dispatch(setMessageLevel('You win!'));
+        store.dispatch(restartLevel());
+      }
     }
   }
 });
