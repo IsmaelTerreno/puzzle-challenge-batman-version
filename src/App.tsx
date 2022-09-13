@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { Solution } from './solution';
+import { Solution } from './components';
 
 const App = () => {
   return <Solution />;
