@@ -1,8 +1,8 @@
 import React from 'react';
-import { Solution } from './components';
+import { LabyrinthContainer } from './components/Labyrinth';
 
 const App = () => {
-  return <Solution />;
+  return <LabyrinthContainer />;
 };
 
 export default App;

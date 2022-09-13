@@ -7,18 +7,18 @@ enum POSITION_ROW_TYPE {
 
 enum LEVEL_ACTIONS {
   SET_PLAYER_LOCATION = 'level/SET_PLAYER_LOCATION',
-  SET_PLAYER_LEFT_MOVEMENTS = 'level/SET_PLAYER_LEFT_MOVEMENTS'
+  DECREMENT_PLAYER_LEFT_MOVEMENTS = 'level/DECREMENT_PLAYER_LEFT_MOVEMENTS'
 }
 
 export const setPosition = (position: CoordinatePosition) => {
   return typedAction(LEVEL_ACTIONS.SET_PLAYER_LOCATION, position);
 };
 
-export const setLeftMovements = (leftMovements: number) => {
-  return typedAction(LEVEL_ACTIONS.SET_PLAYER_LEFT_MOVEMENTS, leftMovements);
+export const decrementLeftMovements = () => {
+  return typedAction(LEVEL_ACTIONS.DECREMENT_PLAYER_LEFT_MOVEMENTS, null);
 };
 
-type UserAction = ReturnType<typeof setPosition | typeof setLeftMovements>;
+type UserAction = ReturnType<typeof setPosition | typeof decrementLeftMovements>;
 
 const initState: LevelStore = {
   rows: [
@@ -60,10 +60,10 @@ export function levelReducer(state = initState, action: UserAction): LevelStore 
         ...state,
         currentLocation: action.payload
       };
-    case LEVEL_ACTIONS.SET_PLAYER_LEFT_MOVEMENTS:
+    case LEVEL_ACTIONS.DECREMENT_PLAYER_LEFT_MOVEMENTS:
       return {
         ...state,
-        leftMovements: action.payload
+        leftMovements: state.leftMovements - 1
       };
     default:
       return state;
