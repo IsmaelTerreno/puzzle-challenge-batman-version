@@ -4,7 +4,7 @@ import 'animate.css';
 
 const useStyles = makeStyles({
   root: {
-    marginTop: 25,
+    marginTop: 10,
     marginBottom: 50,
     padding: 20
   }
@@ -24,9 +24,16 @@ export const ScoreInfo: React.FC<Props> = ({ results }) => {
       <Grid item>
         <Card className={classes.root + ' ' + getEntranceAnimation()}>
           <CardContent>
-            <Typography variant="h3">Score</Typography>
-            <Typography variant="h6">Wins: {wins}</Typography>
-            <Typography variant="h6">Loses: {loses}</Typography>
+            <Grid container direction="row" alignItems="center" justifyContent="center" spacing={8}>
+              <Grid item>
+                <Typography variant="h3">Score</Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">Wins: {wins}</Typography>
+                <Typography variant="h6">Loses: {loses}</Typography>
+                <Typography variant="h6">Level: {1}</Typography>
+              </Grid>
+            </Grid>
           </CardContent>
         </Card>
       </Grid>
