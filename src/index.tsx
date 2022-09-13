@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { store } from './redux/store/configureStore';
 import { getNewPositionMovement, isSupportedMovement } from './utils';
-import { addResultGame, decrementLeftMovements, movePosition, restartLevel, setMessageLevel } from './redux/reducers/level';
+import { addResultGame, decrementLeftMovements, movePosition, setMessageLevel } from './redux/reducers/level';
 
 window.addEventListener('keydown', event => {
   if (isSupportedMovement(event)) {
@@ -16,42 +16,41 @@ window.addEventListener('keydown', event => {
     const leftMovements = store.getState().level.leftMovements;
     const nextLocation: CoordinatePosition = getNewPositionMovement(event, currentLocation, rows);
     const isMoved = nextLocation.column !== currentLocation.column || nextLocation.row !== currentLocation.row;
-    console.log(nextLocation);
     if (isMoved) {
       store.dispatch(decrementLeftMovements());
       store.dispatch(movePosition(nextLocation));
       const isWinnerPlayer = finishLocation.row === nextLocation.row && finishLocation.column === nextLocation.column;
-      const isLoserPlayer = leftMovements < 1;
+      const isLoserPlayer = leftMovements < 2;
       if (isLoserPlayer) {
-        store.dispatch(
-          addResultGame({
-            leftMovements: leftMovements,
-            winner: false
-          })
-        );
-        store.dispatch(setMessageLevel('You lose.'));
-        store.dispatch(restartLevel());
+        setTimeout(() => {
+          store.dispatch(
+            addResultGame({
+              leftMovements: leftMovements,
+              winner: false
+            })
+          );
+          store.dispatch(setMessageLevel('You lose but you can try again.'));
+        }, 1500);
       }
       if (isWinnerPlayer) {
-        store.dispatch(
-          addResultGame({
-            leftMovements: leftMovements,
-            winner: true
-          })
-        );
-        store.dispatch(setMessageLevel('You win!'));
-        //store.dispatch(restartLevel());
+        setTimeout(() => {
+          store.dispatch(
+            addResultGame({
+              leftMovements: leftMovements,
+              winner: true
+            })
+          );
+          store.dispatch(setMessageLevel('You win! keep playing all day long.'));
+        }, 1500);
       }
     }
   }
 });
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
 

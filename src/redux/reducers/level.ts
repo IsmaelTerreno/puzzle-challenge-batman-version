@@ -83,7 +83,8 @@ const startState: LevelStore = {
   },
   leftMovements: 10,
   results: [],
-  message: 'Hey welcome to the party!'
+  message:
+    'Hey welcome to the party!, play the game using the arrows of your keyboard. Your objective is to move from the initial cell (yellow) to the target cell (green) before you run out of moves. Good luck!!'
 };
 
 const initState: LevelStore = { ...startState };
@@ -115,6 +116,12 @@ export function levelReducer(state = initState, action: UserAction): LevelStore 
         ...startState,
         results: [...state.results],
         message: 'Good luck!'
+      };
+    case LEVEL_ACTIONS.SET_LEVEL_MESSAGE:
+      return {
+        ...startState,
+        results: [...state.results],
+        message: action.payload
       };
     default:
       return state;
