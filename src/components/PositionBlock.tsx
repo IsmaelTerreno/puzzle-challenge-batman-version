@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { POSITION_ROW_TYPE } from '../redux/reducers/level';
-import { Card, makeStyles } from '@material-ui/core';
+import { Card, CardContent, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
-    minHeight: 50
+    minHeight: 50,
+    maxWidth: 60
   },
   freeSpace: {
     background: '#ffffff'
@@ -13,10 +14,10 @@ const useStyles = makeStyles({
     background: '#d3d3d3'
   },
   currentPosition: {
-    marginBottom: '#fbff01'
+    background: '#fbff01'
   },
   finishPosition: {
-    marginBottom: '#90ed90'
+    background: '#90ed90'
   }
 });
 
@@ -38,5 +39,9 @@ export const PositionBlock: React.FC<Props> = ({ positionType }) => {
         return '';
     }
   };
-  return <Card className={classes.root + ' ' + getStylePosition(positionType)}></Card>;
+  return (
+    <Card className={classes.root + ' ' + getStylePosition(positionType)}>
+      <CardContent>{positionType === POSITION_ROW_TYPE.currentPosition ? 'Circle' : ''}</CardContent>
+    </Card>
+  );
 };

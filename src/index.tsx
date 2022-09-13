@@ -5,6 +5,20 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { store } from './redux/store/configureStore';
+import { getNewPositionMovement, isSupportedMovement } from './utils';
+import { decrementLeftMovements, movePosition } from './redux/reducers/level';
+
+window.addEventListener('keydown', event => {
+  if (isSupportedMovement(event)) {
+    const currentLocation = store.getState().level.currentLocation;
+    const rows = store.getState().level.rows;
+    const nextLocation: CoordinatePosition = getNewPositionMovement(event, currentLocation, rows);
+    console.log(nextLocation);
+    store.dispatch(decrementLeftMovements());
+    store.dispatch(movePosition(nextLocation));
+    console.log('Moved.');
+  }
+});
 
 ReactDOM.render(
   <React.StrictMode>

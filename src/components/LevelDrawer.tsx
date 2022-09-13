@@ -3,6 +3,7 @@ import { RootState } from '../redux/reducers';
 import { connect } from 'react-redux';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableRow } from '@material-ui/core';
 import { PositionBlock } from './PositionBlock';
+import { POSITION_ROW_TYPE } from '../redux/reducers/level';
 
 const mapStateToProps = (state: RootState) => ({
   rows: state.level.rows,
@@ -23,9 +24,10 @@ const LevelDrawer: React.FC<Props> = ({ rows, currentLocation, startLocation, fi
               return (
                 <TableRow key={'row-area-' + idx}>
                   {row.columns.map((column, idx2) => {
+                    const isCurrentPosition = currentLocation.row === idx && currentLocation.column === idx2;
                     return (
                       <TableCell key={'column-area-' + idx2}>
-                        <PositionBlock positionType={column} />
+                        <PositionBlock positionType={isCurrentPosition ? POSITION_ROW_TYPE.currentPosition : column} />
                       </TableCell>
                     );
                   })}
