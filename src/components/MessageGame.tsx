@@ -19,7 +19,7 @@ const MessageGame: React.FC<Props> = ({ message, setMessageLevel }) => {
   };
   return (
     <Dialog open={message !== ''} aria-labelledby="responsive-dialog-title">
-      <DialogTitle>{'Labyrinth'}</DialogTitle>
+      <DialogTitle>{'Labyrinth - Batman version'}</DialogTitle>
       <DialogContent>
         <DialogContentText>
           <span className="animate__animated animate__bounceIn">{message}</span>
