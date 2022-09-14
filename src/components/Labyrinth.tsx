@@ -5,7 +5,7 @@ import { LevelDrawerContainer } from './LevelDrawer';
 import { MessageGameContainer } from './MessageGame';
 
 const mapStateToProps = (state: RootState) => ({
-  leftMovements: state.level.leftMovements
+  leftMovements: state.level.level.leftMovements
 });
 
 type Props = ReturnType<typeof mapStateToProps>;

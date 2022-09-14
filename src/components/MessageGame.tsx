@@ -3,20 +3,18 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import 'animate.css';
 import { RootState } from '../redux/reducers';
 import { connect } from 'react-redux';
-import { restartLevel } from '../redux/reducers/level';
 import { setMessageLevel } from '../redux/reducers/game';
 
 const mapStateToProps = (state: RootState) => ({
   message: state.game.message
 });
 
-const mapDispatchToProps = { setMessageLevel, restartLevel };
+const mapDispatchToProps = { setMessageLevel };
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
-const MessageGame: React.FC<Props> = ({ message, setMessageLevel, restartLevel }) => {
+const MessageGame: React.FC<Props> = ({ message, setMessageLevel }) => {
   const handleClose = () => {
-    restartLevel();
     setMessageLevel('');
   };
   return (

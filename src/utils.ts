@@ -1,15 +1,15 @@
-import { KEYBOARD_SUPPORT, POSITION_ROW_TYPE } from './redux/reducers/level';
+import { KEYBOARD_SUPPORT, LEVELS, POSITION_ROW_TYPE } from './redux/reducers/level';
 
 export const isSupportedMovement = (keyboardEvent: KeyboardEvent) => {
   return Object.values(KEYBOARD_SUPPORT).includes(keyboardEvent.keyCode);
 };
 
-export const getNewPositionMovement = (keyboardEvent: KeyboardEvent, currentLocation: CoordinatePosition, rows: RowLevel[]) => {
+export const getNewPositionMovement = (keyboardEvent: KeyboardEvent, currentLocation: CoordinatePosition, matrix: RowLevel[]) => {
   let nextPosition: CoordinatePosition;
-  const limitRows = rows.length - 1;
-  const limitCols = rows[0].columns.length - 1;
+  const limitRows = matrix.length - 1;
+  const limitCols = matrix[0].columns.length - 1;
   const isObstacle = (nextLocation: CoordinatePosition) => {
-    const levelLocation = rows[nextLocation.row].columns[nextLocation.column];
+    const levelLocation = matrix[nextLocation.row].columns[nextLocation.column];
     return levelLocation === POSITION_ROW_TYPE.obstacle;
   };
   const isOnColumnLevelLimits = (nextLocation: CoordinatePosition) => {
@@ -57,4 +57,13 @@ export const getNewPositionMovement = (keyboardEvent: KeyboardEvent, currentLoca
       nextPosition = currentLocation;
   }
   return nextPosition;
+};
+
+export const hasNextLevel = (levelNumber: number) => {
+  const limitLevels = LEVELS.length - 1;
+  return levelNumber + 1 <= limitLevels;
+};
+
+export const getNextLevelNumber = (levelNumber: number) => {
+  return hasNextLevel(levelNumber) ? levelNumber + 1 : 0;
 };

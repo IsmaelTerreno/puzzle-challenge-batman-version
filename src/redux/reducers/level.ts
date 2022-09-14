@@ -16,14 +16,19 @@ export enum POSITION_ROW_TYPE {
 }
 
 export enum LEVEL_ACTIONS {
-  RESTART_LEVEL = 'level/RESTART_LEVEL',
+  RESTART_TO_FIRST_LEVEL = 'level/RESTART_TO_FIRST_LEVEL',
+  GO_TO_LEVEL = 'level/GO_TO_LEVEL',
   MOVE_PLAYER_LOCATION = 'level/MOVE_PLAYER_LOCATION',
   SET_PLAYER_LOCATION = 'level/SET_PLAYER_LOCATION',
   DECREMENT_PLAYER_LEFT_MOVEMENTS = 'level/DECREMENT_PLAYER_LEFT_MOVEMENTS'
 }
 
-export const restartLevel = () => {
-  return typedAction(LEVEL_ACTIONS.RESTART_LEVEL, null);
+export const goToLevel = (levelNumber: number) => {
+  return typedAction(LEVEL_ACTIONS.GO_TO_LEVEL, levelNumber);
+};
+
+export const restartToFirstLevel = () => {
+  return typedAction(LEVEL_ACTIONS.RESTART_TO_FIRST_LEVEL, null);
 };
 
 export const movePosition = (position: CoordinatePosition) => {
@@ -38,9 +43,10 @@ export const decrementLeftMovements = () => {
   return typedAction(LEVEL_ACTIONS.DECREMENT_PLAYER_LEFT_MOVEMENTS, null);
 };
 
-type UserAction = ReturnType<typeof setPosition | typeof decrementLeftMovements | typeof movePosition | typeof restartLevel>;
-const startState: LevelStore = {
-  rows: [
+type UserAction = ReturnType<typeof setPosition | typeof decrementLeftMovements | typeof movePosition | typeof restartToFirstLevel | typeof goToLevel>;
+
+export const LEVEL_1_CONFIG: Level = {
+  matrix: [
     {
       columns: [POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace]
     },
@@ -72,6 +78,80 @@ const startState: LevelStore = {
   leftMovements: 10
 };
 
+export const LEVEL_2_CONFIG: Level = {
+  matrix: [
+    {
+      columns: [POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace]
+    },
+    {
+      columns: [POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.obstacle]
+    },
+    {
+      columns: [POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.obstacle]
+    },
+    {
+      columns: [POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.obstacle]
+    },
+    {
+      columns: [POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace]
+    }
+  ],
+  startLocation: {
+    row: 0,
+    column: 4
+  },
+  finishLocation: {
+    row: 3,
+    column: 1
+  },
+  currentLocation: {
+    row: 0,
+    column: 4
+  },
+  leftMovements: 9
+};
+
+export const LEVEL_3_CONFIG: Level = {
+  matrix: [
+    {
+      columns: [POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace]
+    },
+    {
+      columns: [POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.freeSpace]
+    },
+    {
+      columns: [POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.obstacle]
+    },
+    {
+      columns: [POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.obstacle]
+    },
+    {
+      columns: [POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.obstacle]
+    }
+  ],
+  startLocation: {
+    row: 0,
+    column: 4
+  },
+  finishLocation: {
+    row: 2,
+    column: 1
+  },
+  currentLocation: {
+    row: 0,
+    column: 4
+  },
+  leftMovements: 8
+};
+
+export const LEVELS = [LEVEL_1_CONFIG, LEVEL_2_CONFIG, LEVEL_3_CONFIG];
+
+const startState: LevelStore = {
+  levels: LEVELS,
+  currentLevelNumber: 0,
+  level: LEVELS[0]
+};
+
 const initState: LevelStore = { ...startState };
 
 export function levelReducer(state = initState, action: UserAction): LevelStore {
@@ -79,19 +159,34 @@ export function levelReducer(state = initState, action: UserAction): LevelStore 
     case LEVEL_ACTIONS.SET_PLAYER_LOCATION:
       return {
         ...state,
-        currentLocation: action.payload
+        level: {
+          ...state.level,
+          currentLocation: action.payload
+        }
       };
     case LEVEL_ACTIONS.DECREMENT_PLAYER_LEFT_MOVEMENTS:
       return {
         ...state,
-        leftMovements: state.leftMovements - 1
+        level: {
+          ...state.level,
+          leftMovements: state.level.leftMovements - 1
+        }
       };
     case LEVEL_ACTIONS.MOVE_PLAYER_LOCATION:
       return {
         ...state,
-        currentLocation: action.payload
+        level: {
+          ...state.level,
+          currentLocation: action.payload
+        }
       };
-    case LEVEL_ACTIONS.RESTART_LEVEL:
+    case LEVEL_ACTIONS.GO_TO_LEVEL:
+      return {
+        ...state,
+        currentLevelNumber: action.payload,
+        level: LEVELS[action.payload]
+      };
+    case LEVEL_ACTIONS.RESTART_TO_FIRST_LEVEL:
       return {
         ...startState
       };

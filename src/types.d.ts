@@ -12,12 +12,18 @@ type ResultGame = {
   leftMovements: number;
 };
 
-type LevelStore = {
-  rows: RowLevel[];
+type Level = {
+  matrix: RowLevel[];
   startLocation: CoordinatePosition;
   finishLocation: CoordinatePosition;
   currentLocation: CoordinatePosition;
   leftMovements: number;
+};
+
+type LevelStore = {
+  levels: Level[];
+  currentLevelNumber: number;
+  level: Level;
 };
 
 type ScoreStore = {

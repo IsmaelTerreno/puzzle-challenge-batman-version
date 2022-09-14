@@ -10,9 +10,9 @@ const useStyles = makeStyles({
   }
 });
 
-type Props = { results: ResultGame[] };
+type Props = { levelNumber: number; results: ResultGame[] };
 
-export const ScoreInfo: React.FC<Props> = ({ results }) => {
+export const ScoreInfo: React.FC<Props> = ({ results, levelNumber }) => {
   const classes = useStyles();
   const getEntranceAnimation = () => {
     return ' animate__animated animate__bounceIn';
@@ -31,7 +31,7 @@ export const ScoreInfo: React.FC<Props> = ({ results }) => {
               <Grid item>
                 <Typography variant="h6">Wins: {wins}</Typography>
                 <Typography variant="h6">Loses: {loses}</Typography>
-                <Typography variant="h6">Level: {1}</Typography>
+                <Typography variant="h6">Level: {levelNumber + 1}</Typography>
               </Grid>
             </Grid>
           </CardContent>

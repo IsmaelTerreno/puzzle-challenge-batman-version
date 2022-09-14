@@ -19,21 +19,22 @@ const useStyles = makeStyles({
 });
 
 const mapStateToProps = (state: RootState) => ({
-  rows: state.level.rows,
-  currentLocation: state.level.currentLocation,
-  startLocation: state.level.startLocation,
-  finishLocation: state.level.finishLocation,
+  matrix: state.level.level.matrix,
+  currentLocation: state.level.level.currentLocation,
+  startLocation: state.level.level.startLocation,
+  finishLocation: state.level.level.finishLocation,
   results: state.score.results,
-  leftMovements: state.level.leftMovements
+  leftMovements: state.level.level.leftMovements,
+  currentLevelNumber: state.level.currentLevelNumber
 });
 
 type Props = ReturnType<typeof mapStateToProps>;
 
-const LevelDrawer: React.FC<Props> = ({ leftMovements, rows, currentLocation, startLocation, finishLocation, results }) => {
+const LevelDrawer: React.FC<Props> = ({ currentLevelNumber, leftMovements, matrix, currentLocation, startLocation, finishLocation, results }) => {
   const classes = useStyles();
   return (
     <div>
-      <ScoreInfo results={results} />
+      <ScoreInfo levelNumber={currentLevelNumber} results={results} />
       <Grid container direction="row" alignItems="center" justifyContent="center" spacing={2}>
         <Grid className={classes.movesLeftSection} item>
           <Typography variant="h5">Moves left: {leftMovements < 0 ? 0 : leftMovements}</Typography>
@@ -42,7 +43,7 @@ const LevelDrawer: React.FC<Props> = ({ leftMovements, rows, currentLocation, st
       <TableContainer component={Paper} className={classes.table}>
         <Table aria-label="game table">
           <TableBody>
-            {rows.map((row, idx) => {
+            {matrix.map((row, idx) => {
               return (
                 <TableRow key={'row-area-' + idx}>
                   {row.columns.map((column, idx2) => {
