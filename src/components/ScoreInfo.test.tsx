@@ -43,7 +43,7 @@ describe('ScoreInfo', () => {
 
   it('should show loses correctly', () => {
     render(<ScoreInfo completedGames={0} levelNumber={0} results={resultsMock} />);
-    const winsLegend = screen.getByText(/Loses: 3/i);
-    expect(winsLegend).toBeInTheDocument();
+    const losesLegend = screen.getByText(/Loses: 3/i);
+    expect(losesLegend).toBeInTheDocument();
   });
 });

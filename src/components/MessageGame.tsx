@@ -13,7 +13,7 @@ const mapDispatchToProps = { setMessageLevel };
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
 
-const MessageGame: React.FC<Props> = ({ message, setMessageLevel }) => {
+export const MessageGame: React.FC<Props> = ({ message, setMessageLevel }) => {
   const handleClose = () => {
     setMessageLevel('');
   };
