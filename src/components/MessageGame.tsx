@@ -3,10 +3,11 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import 'animate.css';
 import { RootState } from '../redux/reducers';
 import { connect } from 'react-redux';
-import { restartLevel, setMessageLevel } from '../redux/reducers/level';
+import { restartLevel } from '../redux/reducers/level';
+import { setMessageLevel } from '../redux/reducers/game';
 
 const mapStateToProps = (state: RootState) => ({
-  message: state.level.message
+  message: state.game.message
 });
 
 const mapDispatchToProps = { setMessageLevel, restartLevel };

@@ -16,8 +16,6 @@ export enum POSITION_ROW_TYPE {
 }
 
 export enum LEVEL_ACTIONS {
-  SET_LEVEL_MESSAGE = 'level/SET_LEVEL_MESSAGE',
-  ADD_PLAYER_RESULTS = 'level/ADD_PLAYER_RESULTS',
   RESTART_LEVEL = 'level/RESTART_LEVEL',
   MOVE_PLAYER_LOCATION = 'level/MOVE_PLAYER_LOCATION',
   SET_PLAYER_LOCATION = 'level/SET_PLAYER_LOCATION',
@@ -26,14 +24,6 @@ export enum LEVEL_ACTIONS {
 
 export const restartLevel = () => {
   return typedAction(LEVEL_ACTIONS.RESTART_LEVEL, null);
-};
-
-export const addResultGame = (result: ResultGame) => {
-  return typedAction(LEVEL_ACTIONS.ADD_PLAYER_RESULTS, result);
-};
-
-export const setMessageLevel = (message: string) => {
-  return typedAction(LEVEL_ACTIONS.SET_LEVEL_MESSAGE, message);
 };
 
 export const movePosition = (position: CoordinatePosition) => {
@@ -48,9 +38,7 @@ export const decrementLeftMovements = () => {
   return typedAction(LEVEL_ACTIONS.DECREMENT_PLAYER_LEFT_MOVEMENTS, null);
 };
 
-type UserAction = ReturnType<
-  typeof setPosition | typeof decrementLeftMovements | typeof movePosition | typeof addResultGame | typeof restartLevel | typeof setMessageLevel
->;
+type UserAction = ReturnType<typeof setPosition | typeof decrementLeftMovements | typeof movePosition | typeof restartLevel>;
 const startState: LevelStore = {
   rows: [
     {
@@ -81,10 +69,7 @@ const startState: LevelStore = {
     row: 0,
     column: 0
   },
-  leftMovements: 10,
-  results: [],
-  message:
-    'Hey welcome to the party!, play the game using the arrows of your keyboard. Your objective is to move batman from the initial position and find the diamond in the cave before you run out of moves. Good luck batman!!'
+  leftMovements: 10
 };
 
 const initState: LevelStore = { ...startState };
@@ -106,22 +91,9 @@ export function levelReducer(state = initState, action: UserAction): LevelStore 
         ...state,
         currentLocation: action.payload
       };
-    case LEVEL_ACTIONS.ADD_PLAYER_RESULTS:
-      return {
-        ...state,
-        results: [...state.results, action.payload]
-      };
     case LEVEL_ACTIONS.RESTART_LEVEL:
       return {
-        ...startState,
-        results: [...state.results],
-        message: 'Good luck!'
-      };
-    case LEVEL_ACTIONS.SET_LEVEL_MESSAGE:
-      return {
-        ...startState,
-        results: [...state.results],
-        message: action.payload
+        ...startState
       };
     default:
       return state;

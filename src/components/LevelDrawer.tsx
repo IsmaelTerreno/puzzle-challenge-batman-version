@@ -23,7 +23,7 @@ const mapStateToProps = (state: RootState) => ({
   currentLocation: state.level.currentLocation,
   startLocation: state.level.startLocation,
   finishLocation: state.level.finishLocation,
-  results: state.level.results,
+  results: state.score.results,
   leftMovements: state.level.leftMovements
 });
 

@@ -18,6 +18,12 @@ type LevelStore = {
   finishLocation: CoordinatePosition;
   currentLocation: CoordinatePosition;
   leftMovements: number;
+};
+
+type ScoreStore = {
   results: ResultGame[];
+};
+
+type GameStore = {
   message: string;
 };

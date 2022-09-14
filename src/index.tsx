@@ -6,7 +6,9 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { store } from './redux/store/configureStore';
 import { getNewPositionMovement, isSupportedMovement } from './utils';
-import { addResultGame, decrementLeftMovements, movePosition, setMessageLevel } from './redux/reducers/level';
+import { decrementLeftMovements, movePosition } from './redux/reducers/level';
+import { addResultGame } from './redux/reducers/score';
+import { setMessageLevel } from './redux/reducers/game';
 
 window.addEventListener('keydown', event => {
   if (isSupportedMovement(event)) {
