@@ -27,13 +27,13 @@ export function gameReducer(state = initState, action: GameAction): GameStore {
   switch (action.type) {
     case GAME_ACTIONS.SET_LEVEL_MESSAGE:
       return {
-        ...startState,
+        ...state,
         message: action.payload
       };
     case GAME_ACTIONS.ADD_COMPLETED_GAME:
       return {
-        ...startState,
-        completedGames: startState.completedGames + 1
+        ...state,
+        completedGames: state.completedGames + 1
       };
     default:
       return state;
