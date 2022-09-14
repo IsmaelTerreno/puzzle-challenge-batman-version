@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Avatar, Card, CardContent, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Avatar, Button, Card, CardContent, Grid, makeStyles, Typography } from '@material-ui/core';
 import 'animate.css';
 import starIcon from '../assets/star.jpg';
 
@@ -44,6 +44,13 @@ export const ScoreInfo: React.FC<Props> = ({ completedGames, results, levelNumbe
               </Grid>
               <Grid item>{hasCompletedGames && <Typography variant="h6">Completed games</Typography>}</Grid>
               <Grid item>{hasCompletedGames && getStars(completedGames)}</Grid>
+              <Grid item>
+                {hasCompletedGames && completedGames > 3 && (
+                  <Button variant="contained" color="primary" href="https://www.youtube.com/watch?v=v2YlMWr-zO0" target="_blank">
+                    CLICK BECAUSE I'M BATMAN!
+                  </Button>
+                )}
+              </Grid>
             </Grid>
           </CardContent>
         </Card>
