@@ -10,10 +10,7 @@ const useStyles = makeStyles({
   root: {
     minHeight: 80,
     minWidth: 80
-  },
-  freeSpace: {},
-  obstacle: {},
-  currentPosition: {}
+  }
 });
 
 type Props = { positionType: POSITION_ROW_TYPE; isCurrentPosition: boolean; isWinner: boolean; isLoser: boolean };
@@ -23,7 +20,7 @@ export const PositionBlock: React.FC<Props> = ({ positionType, isCurrentPosition
   const getStylePosition = (position: POSITION_ROW_TYPE) => {
     switch (position) {
       case POSITION_ROW_TYPE.currentPosition:
-        return classes.currentPosition;
+        return 'free-space-grass';
       case POSITION_ROW_TYPE.finishPosition:
         return 'free-space-grass';
       case POSITION_ROW_TYPE.freeSpace:
