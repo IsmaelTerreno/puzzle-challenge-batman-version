@@ -45,7 +45,7 @@ export const ScoreInfo: React.FC<Props> = ({ completedGames, results, levelNumbe
               <Grid item>{hasCompletedGames && <Typography variant="h6">Completed games</Typography>}</Grid>
               <Grid item>{hasCompletedGames && getStars(completedGames)}</Grid>
               <Grid item>
-                {hasCompletedGames && completedGames > 3 && (
+                {hasCompletedGames && completedGames > 1 && (
                   <Button variant="contained" color="primary" href="https://www.youtube.com/watch?v=v2YlMWr-zO0" target="_blank">
                     CLICK BECAUSE I'M BATMAN!
                   </Button>
