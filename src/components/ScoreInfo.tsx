@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Avatar, Button, Card, CardContent, Grid, makeStyles, Typography } from '@material-ui/core';
 import 'animate.css';
 import starIcon from '../assets/star.jpg';
+import { LevelProgress } from './LevelProgress';
 
 const useStyles = makeStyles({
   root: {
@@ -29,7 +30,7 @@ export const ScoreInfo: React.FC<Props> = ({ completedGames, results, levelNumbe
   };
   const hasCompletedGames = completedGames > 0;
   return (
-    <Grid container direction="column" alignItems="center" justifyContent="center" spacing={2}>
+    <Grid container direction="column" alignItems="center" justifyContent="flex-end" spacing={2}>
       <Grid item>
         <Card className={classes.root + ' ' + getEntranceAnimation()}>
           <CardContent>
@@ -40,12 +41,16 @@ export const ScoreInfo: React.FC<Props> = ({ completedGames, results, levelNumbe
               <Grid item>
                 <Typography variant="h6">Wins: {wins}</Typography>
                 <Typography variant="h6">Loses: {loses}</Typography>
-                <Typography variant="h6">Level: {levelNumber + 1}</Typography>
               </Grid>
-              <Grid item>{hasCompletedGames && <Typography variant="h6">Completed games</Typography>}</Grid>
-              <Grid item>{hasCompletedGames && getStars(completedGames)}</Grid>
               <Grid item>
-                {hasCompletedGames && completedGames > 1 && (
+                <LevelProgress currenLevel={levelNumber} />
+              </Grid>
+              <Grid item>
+                {hasCompletedGames && <Typography variant="h6">Completed games</Typography>}
+                {hasCompletedGames && getStars(completedGames)}
+              </Grid>
+              <Grid item>
+                {hasCompletedGames && completedGames > 0 && (
                   <Button variant="contained" color="primary" href="https://www.youtube.com/watch?v=v2YlMWr-zO0" target="_blank">
                     CLICK BECAUSE I'M BATMAN!
                   </Button>
