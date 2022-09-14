@@ -3,6 +3,7 @@ import { POSITION_ROW_TYPE } from '../redux/reducers/level';
 import { Avatar, Card, CardContent, Grid, makeStyles } from '@material-ui/core';
 import 'animate.css';
 import '../assets/batman.scss';
+import '../assets/terrain.scss';
 import diamond from '../assets/diamond.jpg';
 
 const useStyles = makeStyles({
@@ -10,21 +11,15 @@ const useStyles = makeStyles({
     minHeight: 80,
     minWidth: 80
   },
-  freeSpace: {
-    background: '#484848'
-  },
-  obstacle: {
-    background: '#563142'
-  },
+  freeSpace: {},
+  obstacle: {},
   currentPosition: {
     background: '#ffffff'
   },
   startPosition: {
     background: '#fbff01'
   },
-  finishPosition: {
-    background: '#484848'
-  },
+  finishPosition: {},
   circlePosition: {
     borderRadius: '50%',
     border: '1px solid #000000',
@@ -43,11 +38,11 @@ export const PositionBlock: React.FC<Props> = ({ positionType, isCurrentPosition
       case POSITION_ROW_TYPE.currentPosition:
         return classes.currentPosition;
       case POSITION_ROW_TYPE.finishPosition:
-        return classes.finishPosition;
+        return classes.finishPosition + ' free-space-grass';
       case POSITION_ROW_TYPE.freeSpace:
-        return classes.freeSpace;
+        return classes.freeSpace + ' free-space-grass';
       case POSITION_ROW_TYPE.obstacle:
-        return classes.obstacle;
+        return classes.obstacle + ' obstacle-wall';
       case POSITION_ROW_TYPE.startPosition:
         return classes.startPosition;
       default:
