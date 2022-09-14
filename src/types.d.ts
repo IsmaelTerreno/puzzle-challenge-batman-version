@@ -32,4 +32,5 @@ type ScoreStore = {
 
 type GameStore = {
   message: string;
+  completedGames: number;
 };

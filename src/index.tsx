@@ -8,7 +8,7 @@ import { store } from './redux/store/configureStore';
 import { getNewPositionMovement, getNextLevelNumber, hasNextLevel, isSupportedMovement } from './utils';
 import { decrementLeftMovements, goToLevel, movePosition, restartToFirstLevel } from './redux/reducers/level';
 import { addResultGame } from './redux/reducers/score';
-import { setMessageLevel } from './redux/reducers/game';
+import { addCompletedGame, setMessageLevel } from './redux/reducers/game';
 
 window.addEventListener('keydown', event => {
   if (isSupportedMovement(event)) {
@@ -50,6 +50,7 @@ window.addEventListener('keydown', event => {
             store.dispatch(goToLevel(getNextLevelNumber(currentLevelNumber)));
           } else {
             store.dispatch(setMessageLevel('Congratulations now Batman have all the diamonds and is more richer!!. You can star again and break records :D'));
+            store.dispatch(addCompletedGame());
             store.dispatch(restartToFirstLevel());
           }
         }, 1500);

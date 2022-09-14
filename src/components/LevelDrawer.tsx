@@ -25,16 +25,26 @@ const mapStateToProps = (state: RootState) => ({
   finishLocation: state.level.level.finishLocation,
   results: state.score.results,
   leftMovements: state.level.level.leftMovements,
-  currentLevelNumber: state.level.currentLevelNumber
+  currentLevelNumber: state.level.currentLevelNumber,
+  completedGames: state.game.completedGames
 });
 
 type Props = ReturnType<typeof mapStateToProps>;
 
-const LevelDrawer: React.FC<Props> = ({ currentLevelNumber, leftMovements, matrix, currentLocation, startLocation, finishLocation, results }) => {
+const LevelDrawer: React.FC<Props> = ({
+  completedGames,
+  currentLevelNumber,
+  leftMovements,
+  matrix,
+  currentLocation,
+  startLocation,
+  finishLocation,
+  results
+}) => {
   const classes = useStyles();
   return (
     <div>
-      <ScoreInfo levelNumber={currentLevelNumber} results={results} />
+      <ScoreInfo completedGames={completedGames} levelNumber={currentLevelNumber} results={results} />
       <Grid container direction="row" alignItems="center" justifyContent="center" spacing={2}>
         <Grid className={classes.movesLeftSection} item>
           <Typography variant="h5">Moves left: {leftMovements < 0 ? 0 : leftMovements}</Typography>
