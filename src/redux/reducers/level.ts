@@ -144,7 +144,40 @@ export const LEVEL_3_CONFIG: Level = {
   leftMovements: 8
 };
 
-export const LEVELS = [LEVEL_1_CONFIG, LEVEL_2_CONFIG, LEVEL_3_CONFIG];
+export const LEVEL_4_CONFIG: Level = {
+  matrix: [
+    {
+      columns: [POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace]
+    },
+    {
+      columns: [POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.freeSpace]
+    },
+    {
+      columns: [POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.obstacle]
+    },
+    {
+      columns: [POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.freeSpace]
+    },
+    {
+      columns: [POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.obstacle, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace, POSITION_ROW_TYPE.freeSpace]
+    }
+  ],
+  startLocation: {
+    row: 0,
+    column: 4
+  },
+  finishLocation: {
+    row: 0,
+    column: 0
+  },
+  currentLocation: {
+    row: 0,
+    column: 4
+  },
+  leftMovements: 7
+};
+
+export const LEVELS = [LEVEL_1_CONFIG, LEVEL_2_CONFIG, LEVEL_3_CONFIG, LEVEL_4_CONFIG];
 
 const startState: LevelStore = {
   levels: LEVELS,
