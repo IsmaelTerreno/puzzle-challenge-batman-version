@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { POSITION_ROW_TYPE } from '../redux/reducers/level';
-import { Card, CardContent, Grid, makeStyles } from '@material-ui/core';
+import { Avatar, Card, CardContent, Grid, makeStyles } from '@material-ui/core';
 import 'animate.css';
+import '../assets/batman.scss';
+import diamond from '../assets/diamond.jpg';
 
 const useStyles = makeStyles({
   root: {
@@ -9,10 +11,10 @@ const useStyles = makeStyles({
     minWidth: 80
   },
   freeSpace: {
-    background: '#ffffff'
+    background: '#484848'
   },
   obstacle: {
-    background: '#d3d3d3'
+    background: '#563142'
   },
   currentPosition: {
     background: '#ffffff'
@@ -21,7 +23,7 @@ const useStyles = makeStyles({
     background: '#fbff01'
   },
   finishPosition: {
-    background: '#90ed90'
+    background: '#484848'
   },
   circlePosition: {
     borderRadius: '50%',
@@ -64,7 +66,7 @@ export const PositionBlock: React.FC<Props> = ({ positionType, isCurrentPosition
   const getLoserAnimation = () => {
     return ' animate__animated animate__shakeX';
   };
-
+  const isFinishPosition = positionType === POSITION_ROW_TYPE.finishPosition;
   return (
     <Grid container direction="column" alignItems="center" justifyContent="center" spacing={2}>
       <Grid item>
@@ -76,7 +78,10 @@ export const PositionBlock: React.FC<Props> = ({ positionType, isCurrentPosition
             (isWinner ? getWinnerAnimation() : isLoser ? getLoserAnimation() : isCurrentPosition ? getMoveAnimation() : getEntranceAnimation())
           }
         >
-          <CardContent>{isCurrentPosition && <div className={classes.circlePosition} />}</CardContent>
+          <CardContent>
+            {isCurrentPosition && <div className="batman" />}
+            {isCurrentPosition && isFinishPosition && <Avatar src={diamond} />}
+          </CardContent>
         </Card>
       </Grid>
     </Grid>

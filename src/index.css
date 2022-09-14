@@ -37,6 +37,8 @@ footer, header, hgroup, menu, nav, section {
 
 body {
 	line-height: 1;
+	background-image: url("./assets/main-back-image.jpg");
+	background-repeat: round;
 }
 
 ol, ul {

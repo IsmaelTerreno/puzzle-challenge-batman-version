@@ -34,3 +34,14 @@
 * Level builder
 * War fog
 * Anything you think might add value
+
+
+Used asset authors
+
+Background level:
+<a href="https://www.freepik.com/free-vector/gold-mine-tunnel-inside-view-cave-with-railway_30895627.htm#query=2d%20game%20background%20cave&position=13&from_view=search">Image by upklyak</a> on Freepik
+
+Batman character css:
+Batman Pixel Art @jordi_com based on code of Joan Leon @nucliweb
+
+Diamond : <a href="https://www.vecteezy.com/vector-art/5008466-vector-pixel-diamonds-pixel-art-style-8-bit">Vector pixel diamonds. Pixel art style. 8-bit Vectors by Vecteezy</a>

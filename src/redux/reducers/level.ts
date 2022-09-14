@@ -84,7 +84,7 @@ const startState: LevelStore = {
   leftMovements: 10,
   results: [],
   message:
-    'Hey welcome to the party!, play the game using the arrows of your keyboard. Your objective is to move from the initial cell (yellow) to the target cell (green) before you run out of moves. Good luck!!'
+    'Hey welcome to the party!, play the game using the arrows of your keyboard. Your objective is to move batman from the initial position and find the diamond in the cave before you run out of moves. Good luck batman!!'
 };
 
 const initState: LevelStore = { ...startState };

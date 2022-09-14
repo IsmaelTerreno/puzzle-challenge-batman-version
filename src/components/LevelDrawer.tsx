@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RootState } from '../redux/reducers';
 import { connect } from 'react-redux';
-import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow } from '@material-ui/core';
+import { Grid, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@material-ui/core';
 import { PositionBlock } from './PositionBlock';
 import { POSITION_ROW_TYPE } from '../redux/reducers/level';
 import { ScoreInfo } from './ScoreInfo';
@@ -10,6 +10,11 @@ const useStyles = makeStyles({
   table: {
     overflow: 'hidden',
     padding: 20
+  },
+  movesLeftSection: {
+    background: '#ffffff',
+    border: 'solid 3px #000000',
+    marginBottom: 10
   }
 });
 
@@ -29,6 +34,11 @@ const LevelDrawer: React.FC<Props> = ({ leftMovements, rows, currentLocation, st
   return (
     <div>
       <ScoreInfo results={results} />
+      <Grid container direction="row" alignItems="center" justifyContent="center" spacing={2}>
+        <Grid className={classes.movesLeftSection} item>
+          <Typography variant="h5">Moves left: {leftMovements < 0 ? 0 : leftMovements}</Typography>
+        </Grid>
+      </Grid>
       <TableContainer component={Paper} className={classes.table}>
         <Table aria-label="game table">
           <TableBody>
