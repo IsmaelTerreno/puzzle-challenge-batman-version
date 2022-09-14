@@ -13,20 +13,7 @@ const useStyles = makeStyles({
   },
   freeSpace: {},
   obstacle: {},
-  currentPosition: {
-    background: '#ffffff'
-  },
-  startPosition: {
-    background: '#fbff01'
-  },
-  finishPosition: {},
-  circlePosition: {
-    borderRadius: '50%',
-    border: '1px solid #000000',
-    background: '#ffffff',
-    padding: 23,
-    position: 'absolute'
-  }
+  currentPosition: {}
 });
 
 type Props = { positionType: POSITION_ROW_TYPE; isCurrentPosition: boolean; isWinner: boolean; isLoser: boolean };
@@ -38,13 +25,13 @@ export const PositionBlock: React.FC<Props> = ({ positionType, isCurrentPosition
       case POSITION_ROW_TYPE.currentPosition:
         return classes.currentPosition;
       case POSITION_ROW_TYPE.finishPosition:
-        return classes.finishPosition + ' free-space-grass';
+        return 'free-space-grass';
       case POSITION_ROW_TYPE.freeSpace:
-        return classes.freeSpace + ' free-space-grass';
+        return 'free-space-grass';
       case POSITION_ROW_TYPE.obstacle:
-        return classes.obstacle + ' obstacle-wall';
+        return 'obstacle-wall';
       case POSITION_ROW_TYPE.startPosition:
-        return classes.startPosition;
+        return 'star-position-castle';
       default:
         return '';
     }

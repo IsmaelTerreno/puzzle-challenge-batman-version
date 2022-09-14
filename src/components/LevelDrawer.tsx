@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RootState } from '../redux/reducers';
 import { connect } from 'react-redux';
-import { Grid, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@material-ui/core';
+import { Grid, makeStyles, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@material-ui/core';
 import { PositionBlock } from './PositionBlock';
 import { POSITION_ROW_TYPE } from '../redux/reducers/level';
 import { ScoreInfo } from './ScoreInfo';
@@ -9,12 +9,16 @@ import { ScoreInfo } from './ScoreInfo';
 const useStyles = makeStyles({
   table: {
     overflow: 'hidden',
-    padding: 20
+    padding: 20,
+    backgroundColor: '#160c32'
   },
   movesLeftSection: {
     background: '#ffffff',
     border: 'solid 3px #000000',
     marginBottom: 10
+  },
+  tableCell: {
+    border: 'none'
   }
 });
 
@@ -50,7 +54,7 @@ const LevelDrawer: React.FC<Props> = ({
           <Typography variant="h5">Moves left: {leftMovements < 0 ? 0 : leftMovements}</Typography>
         </Grid>
       </Grid>
-      <TableContainer component={Paper} className={classes.table}>
+      <TableContainer className={classes.table}>
         <Table aria-label="game table">
           <TableBody>
             {matrix.map((row, idx) => {
@@ -73,7 +77,7 @@ const LevelDrawer: React.FC<Props> = ({
                       positionType = POSITION_ROW_TYPE.startPosition;
                     }
                     return (
-                      <TableCell key={'column-area-' + idx2}>
+                      <TableCell className={classes.tableCell} key={'column-area-' + idx2}>
                         <PositionBlock positionType={positionType} isCurrentPosition={isCurrentPosition} isWinner={isWinnerPlayer} isLoser={isLoserPlayer} />
                       </TableCell>
                     );
