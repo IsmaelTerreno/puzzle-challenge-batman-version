@@ -13,24 +13,47 @@ const useStyles = makeStyles({
   }
 });
 
+type PositionConfigInfo = {
+  classCss: string;
+  title: string;
+};
+
 type Props = { positionType: POSITION_ROW_TYPE; isCurrentPosition: boolean; isWinner: boolean; isLoser: boolean };
 
 export const PositionBlock: React.FC<Props> = ({ positionType, isCurrentPosition, isWinner, isLoser }) => {
   const classes = useStyles();
-  const getStylePosition = (position: POSITION_ROW_TYPE) => {
+  const getStyleAndTitlePosition = (position: POSITION_ROW_TYPE): PositionConfigInfo => {
     switch (position) {
       case POSITION_ROW_TYPE.currentPosition:
-        return 'free-space-grass';
+        return {
+          classCss: 'free-space-grass',
+          title: 'Free space path'
+        };
       case POSITION_ROW_TYPE.finishPosition:
-        return 'free-space-grass';
+        return {
+          classCss: 'free-space-grass',
+          title: 'Finish position target'
+        };
       case POSITION_ROW_TYPE.freeSpace:
-        return 'free-space-grass';
+        return {
+          classCss: 'free-space-grass',
+          title: 'Free space path'
+        };
       case POSITION_ROW_TYPE.obstacle:
-        return 'obstacle-wall';
+        return {
+          classCss: 'obstacle-wall',
+          title: 'Obstacle path'
+        };
       case POSITION_ROW_TYPE.startPosition:
-        return 'star-position-castle';
+        return {
+          classCss: 'star-position-castle',
+          title: 'Castle in starting position'
+        };
       default:
-        return '';
+        return {
+          classCss: 'free-space-grass',
+          title: 'Free space path'
+        };
     }
   };
   const getEntranceAnimation = () => {
@@ -46,20 +69,22 @@ export const PositionBlock: React.FC<Props> = ({ positionType, isCurrentPosition
     return ' animate__animated animate__shakeX';
   };
   const isFinishPosition = positionType === POSITION_ROW_TYPE.finishPosition;
+  const positionInfo: PositionConfigInfo = getStyleAndTitlePosition(positionType);
   return (
     <Grid container direction="column" alignItems="center" justifyContent="center" spacing={2}>
       <Grid item>
         <Card
+          title={positionInfo.title}
           className={
             classes.root +
             ' ' +
-            getStylePosition(positionType) +
+            positionInfo.classCss +
             (isWinner ? getWinnerAnimation() : isLoser ? getLoserAnimation() : isCurrentPosition ? getMoveAnimation() : getEntranceAnimation())
           }
         >
           <CardContent>
-            {isCurrentPosition && <div className="batman" />}
-            {isCurrentPosition && isFinishPosition && <Avatar src={diamond} />}
+            {isCurrentPosition && <div className="batman" title="Batman" />}
+            {isCurrentPosition && isFinishPosition && <Avatar title="Diamond" src={diamond} />}
           </CardContent>
         </Card>
       </Grid>
