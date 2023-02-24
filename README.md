@@ -68,3 +68,4 @@ Batman character css:
 Batman Pixel Art @jordi_com based on code of Joan Leon @nucliweb
 
 Diamond : <a href="https://www.vecteezy.com/vector-art/5008466-vector-pixel-diamonds-pixel-art-style-8-bit">Vector pixel diamonds. Pixel art style. 8-bit Vectors by Vecteezy</a>
+
