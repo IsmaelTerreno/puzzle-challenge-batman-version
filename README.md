@@ -55,7 +55,7 @@
 
 ### LIVE DEMO ON HEROKU
 
-GO TO DEMO: No online now
+GO TO DEMO: https://puzzle-challenge-batman-version.vercel.app
 
 
 
