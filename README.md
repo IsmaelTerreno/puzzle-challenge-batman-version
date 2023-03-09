@@ -17,7 +17,7 @@
 * EXTRA SECRET GAME BONUS: After complete 1 game you will see a new button to a funny batman video called "BECAUSE I'M BATMAN!!"
 * Level progression (win and go the next level) and level progress.
 
-### LIVE DEMO ON HEROKU
+### LIVE DEMO
 
 🎮 Play the game at https://puzzle-challenge-batman-version.vercel.app
 
